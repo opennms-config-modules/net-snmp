@@ -6,16 +6,16 @@ OpenNMS configuration for *nix systems with Net-SNMP agent installed.
 
 Running OpenNMS *NIX operating system
 
+- Download the configuration module from releases as tar.gz file
 - OpenNMS 1.12+
 - OpenNMS 14+
 - Net-SNMP agents
 - Network access with SNMP v1, v2c, v3
-- OpenNMS running on Linux
 - Optional: git
 
 Running OpenNMS on Windows operating system
 
-- Download the configuration manually
+- Download the configuration module from releases as ZIP file
 - If linking is not possible, you can copy the files to the location
 - Optional: git
 
