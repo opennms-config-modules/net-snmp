@@ -1,0 +1,52 @@
+# net-snmp
+
+OpenNMS configuration for *nix systems with Net-SNMP agent installed.
+
+## Installation
+
+.Download and install from GitHub
+[source, bash]
+----
+cd $OPENNMS_HOME/etc/modules-available
+git clone https://github.com/opennms-config-modules/net-snmp.git
+----
+
+### Events
+.Install 'netsnmp.events.xml'
+[source, bash]
+----
+cd $OPENNMS_HOME/etc/events
+ln -s ../modules-available/net-snmp/events/*.xml .
+----
+
+.Include in eventconf.xml
+[source, xml]
+----
+<event-file>events/netsnmp.events.xml</event-file>
+----
+
+### Datacollection
+
+.Install datacollection configuration
+[source, bash]
+----
+cd $OPENNMS_HOME/etc/datacollection
+ln -s ../modules-available/net-snmp/datacollection/*.xml .
+----
+
+.Include in datacollection-config.xml
+[source, xml]
+----
+<include-collection dataCollectionGroup="Net-SNMP-disk"/>
+<include-collection dataCollectionGroup="Net-SNMP-lmsensors"/>
+<include-collection dataCollectionGroup="Net-SNMP-system"/>
+----
+
+### Graph report definitions
+
+.Install graph report definitions
+[source, bash]
+----
+cd $OPENNMS_HOME/etc/snmp-graph.properties.d
+ln -s ../modules-available/net-snmp/graphs/*.properties .
+----
