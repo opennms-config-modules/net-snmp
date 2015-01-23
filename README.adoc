@@ -1,2 +1,18 @@
 # net-snmp
 OpenNMS configuration for *nix systems with Net-SNMP agent installed
+
+## Installation
+
+.Include in datacollection-config.xml
+[source, xml]
+----
+<include-collection dataCollectionGroup="Net-SNMP-disk"/>
+<include-collection dataCollectionGroup="Net-SNMP-lmsensors"/>
+<include-collection dataCollectionGroup="Net-SNMP-system"/>
+----
+
+.Include in eventconf.xml
+[source, xml]
+----
+<event-file>events/netsnmp.events.xml</event-file>
+----
