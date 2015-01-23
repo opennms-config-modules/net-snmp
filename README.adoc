@@ -1,0 +1,2 @@
+# net-snmp
+OpenNMS configuration for *nix systems with Net-SNMP agent installed
