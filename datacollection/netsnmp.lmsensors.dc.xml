@@ -2,19 +2,19 @@
 <datacollection-group name="Net-SNMP-lmsensors">
     <resourceType name="lmTempIndex" label="Hardware Sensors: Temperature (lmSensors MIB)"
                   resourceLabel="${lms-tempdevice} (index ${index})">
-        <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistAllSelectorStrategy"/>
+        <persistenceSelectorStrategy class="org.opennms.netmgt.collection.support.PersistAllSelectorStrategy"/>
         <storageStrategy class="org.opennms.netmgt.collection.support.IndexStorageStrategy"/>
     </resourceType>
 
     <resourceType name="lmFanIndex" label="Hardware Sensors: Fan (lmSensors MIB)"
                   resourceLabel="${lms-fandevice} (index ${index})">
-        <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistAllSelectorStrategy"/>
+        <persistenceSelectorStrategy class="org.opennms.netmgt.collection.support.PersistAllSelectorStrategy"/>
         <storageStrategy class="org.opennms.netmgt.collection.support.IndexStorageStrategy"/>
     </resourceType>
 
     <resourceType name="lmVoltIndex" label="Hardware Sensors: Voltage (lmSensors MIB)"
                   resourceLabel="${lms-voltdevice} (index ${index})">
-        <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistAllSelectorStrategy"/>
+        <persistenceSelectorStrategy class="org.opennms.netmgt.collection.support.PersistAllSelectorStrategy"/>
         <storageStrategy class="org.opennms.netmgt.collection.support.IndexStorageStrategy"/>
     </resourceType>
 
