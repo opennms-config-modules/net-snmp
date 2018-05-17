@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<datacollection-group name="Net-SNMP-lmsensors">
+<datacollection-group xmlns="https://xmlns.opennms.org/xsd/config/datacollection" name="Net-SNMP-lmsensors">
     <resourceType name="lmTempIndex" label="Hardware Sensors: Temperature (lmSensors MIB)"
                   resourceLabel="${lms-tempdevice} (index ${index})">
         <persistenceSelectorStrategy class="org.opennms.netmgt.collection.support.PersistAllSelectorStrategy"/>

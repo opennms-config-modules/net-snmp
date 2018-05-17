@@ -1,8 +1,8 @@
-# net-snmp
+= Net-SNMP
 
 OpenNMS configuration for *nix systems with Net-SNMP agent installed.
 
-## Requirements
+== Requirements
 
 Running OpenNMS *NIX operating system
 
@@ -19,36 +19,36 @@ Running OpenNMS on Windows operating system
 - If linking is not possible, you can copy the files to the location
 - Optional: git
 
-## Installation
+== Installation
 
 .Download and install from GitHub
 [source, bash]
 ----
-cd $OPENNMS_HOME/etc/modules-available
+mkdir ${HOME}/opennms-config-workspace
+cd ${HOME}/opennms-config-workspace
 git clone https://github.com/opennms-config-modules/net-snmp.git
 ----
 
-### Events
-.Install 'netsnmp.events.xml'
+=== Events
+
+.Install events
 [source, bash]
 ----
-cd $OPENNMS_HOME/etc/events
-ln -s ../modules-available/net-snmp/events/*.xml .
+cp ${HOME}/opennms-config-workspace/net-snmp/events/*.xml ${OPENNMS_HOME}/etc/events
 ----
 
 .Include in eventconf.xml
 [source, xml]
 ----
-<event-file>events/netsnmp.events.xml</event-file>
+<event-file>events/net-snmp.events.xml</event-file>
 ----
 
-### Datacollection
+=== Data Collection
 
 .Install datacollection configuration
 [source, bash]
 ----
-cd $OPENNMS_HOME/etc/datacollection
-ln -s ../modules-available/net-snmp/datacollection/*.xml .
+cp ${HOME}/opennms-config-workspace/net-snmp/datacollection/*.xml ${OPENNMS_HOME}/etc/datacollection
 ----
 
 .Include in datacollection-config.xml
@@ -59,13 +59,10 @@ ln -s ../modules-available/net-snmp/datacollection/*.xml .
 <include-collection dataCollectionGroup="Net-SNMP-system"/>
 ----
 
-### Graph report definitions
+=== Graph Report Definitions
 
 .Install graph report definitions
 [source, bash]
 ----
-cd $OPENNMS_HOME/etc/snmp-graph.properties.d
-ln -s ../modules-available/net-snmp/graphs/*.properties .
+cp ${HOME}/opennms-config-workspace/net-snmp/graphs/*.properties ${OPENNMS_HOME}/etc/snmp-graph.properties.d
 ----
-
-Licensed under the GNU Affero General Public License 3+. You may obtain a copy of the License at http://www.gnu.org/licenses/agpl-3.0.html.

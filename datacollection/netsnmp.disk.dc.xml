@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<datacollection-group name="Net-SNMP-disk">
+<datacollection-group xmlns="https://xmlns.opennms.org/xsd/config/datacollection" name="Net-SNMP-disk">
     <resourceType name="diskIOIndex" label="Disk IO (UCD-SNMP MIB)"
                   resourceLabel="${diskIODevice} (index ${index})">
         <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistRegexSelectorStrategy">
