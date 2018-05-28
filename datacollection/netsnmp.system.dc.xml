@@ -6,7 +6,6 @@
     </group>
 
     <group name="ucd-memory" ifType="ignore">
-        <!-- Total Swap Size configured for the host. -->
         <mibObj oid=".1.3.6.1.4.1.2021.4.3" instance="0" alias="memTotalSwap" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2021.4.4" instance="0" alias="memAvailSwap" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2021.4.5" instance="0" alias="memTotalReal" type="integer"/>
@@ -33,17 +32,15 @@
         <mibObj oid=".1.3.6.1.4.1.2021.11.56" instance="0" alias="CpuRawInterrupt" type="counter"/>
         <mibObj oid=".1.3.6.1.4.1.2021.11.57" instance="0" alias="IORawSent" type="counter"/>
         <mibObj oid=".1.3.6.1.4.1.2021.11.58" instance="0" alias="IORawReceived" type="counter"/>
-    </group>
-
-    <group name="ucd-sysstat-raw" ifType="ignore">
         <mibObj oid=".1.3.6.1.4.1.2021.11.59" instance="0" alias="SysRawInterrupts" type="counter"/>
         <mibObj oid=".1.3.6.1.4.1.2021.11.60" instance="0" alias="SysRawContext" type="counter"/>
-    </group>
-
-    <group name="ucd-sysstat-raw-more" ifType="ignore">
         <mibObj oid=".1.3.6.1.4.1.2021.11.61" instance="0" alias="CpuRawSoftIRQ" type="counter"/>
         <mibObj oid=".1.3.6.1.4.1.2021.11.62" instance="0" alias="RawBlksSwapIn" type="counter"/>
         <mibObj oid=".1.3.6.1.4.1.2021.11.63" instance="0" alias="RawBlksSwapOut" type="counter"/>
+        <mibObj oid=".1.3.6.1.4.1.2021.11.64" instance="0" alias="CpuRawSteal" type="counter" />
+        <mibObj oid=".1.3.6.1.4.1.2021.11.65" instance="0" alias="CpuRawGuest" type="counter" />
+        <mibObj oid=".1.3.6.1.4.1.2021.11.66" instance="0" alias="CpuRawGuestNice" type="counter" />
+        <mibObj oid=".1.3.6.1.4.1.2021.11.67" instance="0" alias="CpuNumCpus" type="integer" />
     </group>
 
     <systemDef name="Net-SNMP (UCD) System">
@@ -52,8 +49,6 @@
             <includeGroup>ucd-loadavg</includeGroup>
             <includeGroup>ucd-memory</includeGroup>
             <includeGroup>ucd-sysstat</includeGroup>
-            <includeGroup>ucd-sysstat-raw</includeGroup>
-            <includeGroup>ucd-sysstat-raw-more</includeGroup>
         </collect>
     </systemDef>
 
@@ -63,8 +58,6 @@
             <includeGroup>ucd-loadavg</includeGroup>
             <includeGroup>ucd-memory</includeGroup>
             <includeGroup>ucd-sysstat</includeGroup>
-            <includeGroup>ucd-sysstat-raw</includeGroup>
-            <includeGroup>ucd-sysstat-raw-more</includeGroup>
         </collect>
     </systemDef>
 
@@ -74,8 +67,6 @@
             <includeGroup>ucd-loadavg</includeGroup>
             <includeGroup>ucd-memory</includeGroup>
             <includeGroup>ucd-sysstat</includeGroup>
-            <includeGroup>ucd-sysstat-raw</includeGroup>
-            <includeGroup>ucd-sysstat-raw-more</includeGroup>
         </collect>
     </systemDef>
 
@@ -85,8 +76,6 @@
             <includeGroup>ucd-loadavg</includeGroup>
             <includeGroup>ucd-memory</includeGroup>
             <includeGroup>ucd-sysstat</includeGroup>
-            <includeGroup>ucd-sysstat-raw</includeGroup>
-            <includeGroup>ucd-sysstat-raw-more</includeGroup>
         </collect>
     </systemDef>
 </datacollection-group>
