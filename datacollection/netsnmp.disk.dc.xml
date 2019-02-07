@@ -2,7 +2,7 @@
     <resourceType name="diskIOIndex" label="Disk IO (UCD-SNMP MIB)"
                   resourceLabel="${diskIODevice} (index ${index})">
         <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistRegexSelectorStrategy">
-            <parameter key="match-expression" value="not(#diskIODevice matches '^(loop|ram|bcache).*')"/>
+            <parameter key="match-expression" value="not(#diskIODevice matches '^(loop|ram|bcache|rbd).*')"/>
         </persistenceSelectorStrategy>
         <storageStrategy class="org.opennms.netmgt.dao.support.SiblingColumnStorageStrategy">
             <parameter key="sibling-column-name" value="diskIODevice"/>
