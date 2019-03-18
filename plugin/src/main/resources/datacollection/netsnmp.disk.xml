@@ -1,0 +1,59 @@
+<datacollection-group xmlns="http://xmlns.opennms.org/xsd/config/datacollection" name="Net-SNMP-disk">
+  <group name="ucd-diskio" ifType="all">
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.9" instance="diskIOIndex" alias="diskIOLA1" type="integer"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.10" instance="diskIOIndex" alias="diskIOLA5" type="integer"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.11" instance="diskIOIndex" alias="diskIOLA15" type="integer"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.2" instance="diskIOIndex" alias="diskIODevice" type="string"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.3" instance="diskIOIndex" alias="diskIONRead" type="counter"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.4" instance="diskIOIndex" alias="diskIONWritten" type="counter"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.5" instance="diskIOIndex" alias="diskIOReads" type="counter"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.6" instance="diskIOIndex" alias="diskIOWrites" type="counter"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.12" instance="diskIOIndex" alias="diskIONReadX" type="Counter64"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.13.15.1.1.13" instance="diskIOIndex" alias="diskIONWrittenX" type="Counter64"/>
+  </group>
+
+  <group name="net-snmp-disk" ifType="all">
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.2" instance="dskIndex" alias="ns-dskPath" type="string"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.3" instance="dskIndex" alias="ns-dskDevice" type="string"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.6" instance="dskIndex" alias="ns-dskTotal" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.7" instance="dskIndex" alias="ns-dskAvail" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.8" instance="dskIndex" alias="ns-dskUsed" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.9" instance="dskIndex" alias="ns-dskPercent" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.10" instance="dskIndex" alias="ns-dskPercentNode" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.11" instance="dskIndex" alias="ns-dskTotalLow" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.12" instance="dskIndex" alias="ns-dskTotalHigh" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.13" instance="dskIndex" alias="ns-dskAvailLow" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.14" instance="dskIndex" alias="ns-dskAvailHigh" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.15" instance="dskIndex" alias="ns-dskUsedLow" type="gauge"/>
+    <mibObj oid=".1.3.6.1.4.1.2021.9.1.16" instance="dskIndex" alias="ns-dskUsedHigh" type="gauge"/>
+  </group>
+
+  <systemDef name="Net-SNMP (UCD) disk">
+    <sysoidMask>.1.3.6.1.4.1.2021.250.</sysoidMask>
+    <collect>
+      <includeGroup>net-snmp-disk</includeGroup>
+    </collect>
+  </systemDef>
+
+  <systemDef name="Net-SNMP disk">
+    <sysoidMask>.1.3.6.1.4.1.8072.3.</sysoidMask>
+    <collect>
+      <includeGroup>ucd-diskio</includeGroup>
+      <includeGroup>net-snmp-disk</includeGroup>
+    </collect>
+  </systemDef>
+
+  <systemDef name="Net-SNMP 5.5 with sysObjectID bug on i386 disk">
+    <sysoid>.1.3</sysoid>
+    <collect>
+      <includeGroup>net-snmp-disk</includeGroup>
+    </collect>
+  </systemDef>
+
+  <systemDef name="Net-SNMP 5.5 with sysObjectID bug on x86_64 disk">
+    <sysoid>.0.1</sysoid>
+    <collect>
+      <includeGroup>net-snmp-disk</includeGroup>
+    </collect>
+  </systemDef>
+</datacollection-group>

@@ -1,2 +1,4 @@
-net-snmp.iml
+.idea/
+*/target/*
+*.iml
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features name="openmms-plugins-config-net-snmp-features" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0">
+
+    <repository>mvn:org.opennms.integration.api/karaf-features/${opennms.api.version}/xml</repository>
+
+    <feature name="opennms-plugins-config-net-snmp" description="OpenNMS :: Plugins :: Config :: Net-SNMP" version="${project.version}">
+        <feature dependency="true">aries-blueprint</feature>
+        <feature version="${opennms.api.version}" dependency="true">opennms-integration-api</feature>
+        <bundle>mvn:org.opennms.plugins.config/netsnmp-plugin/${project.version}</bundle>
+    </feature>
+
+</features>
