@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.opennms.plugins.config</groupId>
-    <artifactId>net-snmp-parent</artifactId>
+    <artifactId>netsnmp-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>net-snmp-features</artifactId>
+  <artifactId>netsnmp-features</artifactId>
   <name>OpenNMS :: Plugins :: Config :: Net-SNMP :: Karaf Features</name>
   <packaging>pom</packaging>
 
@@ -110,7 +110,7 @@
 
     <dependency>
       <groupId>org.opennms.plugins.config</groupId>
-      <artifactId>net-snmp-plugin</artifactId>
+      <artifactId>netsnmp-plugin</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
