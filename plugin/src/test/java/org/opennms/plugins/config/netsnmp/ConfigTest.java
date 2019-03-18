@@ -30,6 +30,7 @@ package org.opennms.plugins.config.netsnmp;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
@@ -66,16 +67,22 @@ public class ConfigTest {
         EventDefinition nsNotifyStart = eventDefinitions.get(0);
         assertThat(nsNotifyStart.getUei(), equalTo("uei.opennms.org/vendor/netsnmp/traps/nsNotifyStart"));
         assertThat(nsNotifyStart.getPriority(), equalTo(20));
-        assertThat(nsNotifyStart.getSeverity(),equalTo(Severity.NORMAL));
+        assertThat(nsNotifyStart.getSeverity(), equalTo(Severity.NORMAL));
 
         EventDefinition nsNotifyShutdown = eventDefinitions.get(1);
         assertThat(nsNotifyShutdown.getUei(), equalTo("uei.opennms.org/vendor/netsnmp/traps/nsNotifyShutdown"));
         assertThat(nsNotifyShutdown.getPriority(), equalTo(20));
-        assertThat(nsNotifyShutdown.getSeverity(),equalTo(Severity.WARNING));
+        assertThat(nsNotifyShutdown.getSeverity(), equalTo(Severity.WARNING));
 
         EventDefinition nsNotifyRestart = eventDefinitions.get(2);
         assertThat(nsNotifyRestart.getUei(), equalTo("uei.opennms.org/vendor/netsnmp/traps/nsNotifyRestart"));
         assertThat(nsNotifyRestart.getPriority(), equalTo(20));
-        assertThat(nsNotifyRestart.getSeverity(),equalTo(Severity.NORMAL));
+        assertThat(nsNotifyRestart.getSeverity(), equalTo(Severity.NORMAL));
+    }
+
+    @Test
+    public void testAliasRrdMax19CharLimit() {
+        NetSnmpSnmpCollectionExtensionImpl snmpCollectionExtension = new NetSnmpSnmpCollectionExtensionImpl();
+        snmpCollectionExtension.getSnmpDataCollectionGroups().forEach(collectionGroup -> collectionGroup.getGroups().forEach(group -> group.getMibObjs().forEach(mibObj -> assertThat(mibObj.getAlias().length(), lessThanOrEqualTo(19)))));
     }
 }
