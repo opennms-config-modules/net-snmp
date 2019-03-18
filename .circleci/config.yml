@@ -1,0 +1,25 @@
+version: 2.1
+
+executors:
+  maven-executor:
+    docker:
+      - image: opennms/maven:3.6.0-b3
+
+workflows:
+  # Run build-jobs for all branches and any tag
+  build-jobs:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+
+jobs:
+  build:
+    executor: maven-executor
+    steps:
+      - checkout
+      - run:
+          name: Build configuration module
+          command: |
+            mvn install
