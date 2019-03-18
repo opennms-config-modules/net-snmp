@@ -30,25 +30,18 @@ package org.opennms.plugins.config.netsnmp;
 
 import java.util.List;
 
-import org.opennms.integration.api.v1.config.datacollection.SnmpCollectionExtension;
-import org.opennms.integration.api.v1.config.datacollection.SnmpDataCollection;
-import org.opennms.integration.api.xml.ClasspathSnmpDataCollectionLoader;
+import org.opennms.integration.api.v1.config.datacollection.graphs.PrefabGraph;
+import org.opennms.integration.api.xml.ClassPathGraphPropertiesLoader;
 
-public class SnmpCollectionExtensionImpl implements SnmpCollectionExtension {
+public class NetSnmpGraphPropertiesExtension implements org.opennms.integration.api.v1.config.datacollection.graphs.GraphPropertiesExtension {
 
-    private final ClasspathSnmpDataCollectionLoader snmpDataCollectionLoader =
-            new ClasspathSnmpDataCollectionLoader(SnmpCollectionExtensionImpl.class,
-                    "netsnmp.disk.xml",
-                    "netsnmp.lmsensors.xml",
-                    "netsnmp.system.xml");
+    private ClassPathGraphPropertiesLoader graphPropertiesLoader = new ClassPathGraphPropertiesLoader(NetSnmpGraphPropertiesExtension.class,
+            "netsnmp.disk.graph.properties",
+            "netsnmp.lmsensors.graph.properties",
+            "netsnmp.system.graph.properties");
 
     @Override
-    public List<SnmpDataCollection> getSnmpDataCollectionGroups() {
-        return snmpDataCollectionLoader.getSnmpDataCollections();
-    }
-
-    @Override
-    public String getSnmpCollectionName() {
-        return "default";
+    public List<PrefabGraph> getPrefabGraphs() {
+        return graphPropertiesLoader.getGraphProperties();
     }
 }

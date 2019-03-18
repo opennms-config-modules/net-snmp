@@ -28,20 +28,20 @@
 
 package org.opennms.plugins.config.netsnmp;
 
+import org.opennms.integration.api.v1.config.datacollection.ResourceType;
+import org.opennms.integration.api.xml.ClassPathResourceTypesLoader;
+
 import java.util.List;
 
-import org.opennms.integration.api.v1.config.datacollection.graphs.PrefabGraph;
-import org.opennms.integration.api.xml.ClassPathGraphPropertiesLoader;
+public class NetSnmpResourceTypesExtension implements org.opennms.integration.api.v1.config.datacollection.ResourceTypesExtension {
 
-public class GraphPropertiesExtension implements org.opennms.integration.api.v1.config.datacollection.graphs.GraphPropertiesExtension {
-
-    private ClassPathGraphPropertiesLoader graphPropertiesLoader = new ClassPathGraphPropertiesLoader(GraphPropertiesExtension.class,
-            "netsnmp.disk.graph.properties",
-            "netsnmp.lmsensors.graph.properties",
-            "netsnmp.system.graph.properties");
+    private final ClassPathResourceTypesLoader classPathResourceTypesLoader =
+            new ClassPathResourceTypesLoader(NetSnmpResourceTypesExtension.class,
+                    "net-snmp-disk-resource.xml",
+                    "net-snmp-lmsensors-resources.xml");
 
     @Override
-    public List<PrefabGraph> getPrefabGraphs() {
-        return graphPropertiesLoader.getGraphProperties();
+    public List<ResourceType> getResourceTypes() {
+        return classPathResourceTypesLoader.getResourceTypes();
     }
 }

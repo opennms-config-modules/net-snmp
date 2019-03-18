@@ -28,30 +28,54 @@
 
 package org.opennms.plugins.config.netsnmp;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
-import org.checkerframework.checker.interning.qual.UsesObjectEquals;
 import org.junit.Test;
+import org.opennms.integration.api.v1.config.events.EventDefinition;
+import org.opennms.integration.api.v1.model.Severity;
+
+import java.util.List;
 
 public class ConfigTest {
 
     @Test
     public void canLoadSnmpCollectionExtension() {
-        SnmpCollectionExtensionImpl snmpCollectionExtension = new SnmpCollectionExtensionImpl();
+        NetSnmpSnmpCollectionExtensionImpl snmpCollectionExtension = new NetSnmpSnmpCollectionExtensionImpl();
         assertThat(snmpCollectionExtension.getSnmpDataCollectionGroups(), hasSize(3));
     }
 
     @Test
     public void canLoadGraphPropertiesExtension() {
-        GraphPropertiesExtension gaphPropertiesExtension = new GraphPropertiesExtension();
-        assertThat(gaphPropertiesExtension.getPrefabGraphs(), hasSize(24));
+        NetSnmpGraphPropertiesExtension graphPropertiesExtension = new NetSnmpGraphPropertiesExtension();
+        assertThat(graphPropertiesExtension.getPrefabGraphs(), hasSize(24));
     }
 
     @Test
     public void canLoadResourceTypesExtension() {
-        ResourceTypesExtension resourceTypesExtension = new ResourceTypesExtension();
+        NetSnmpResourceTypesExtension resourceTypesExtension = new NetSnmpResourceTypesExtension();
         assertThat(resourceTypesExtension.getResourceTypes(), hasSize(2));
+    }
+
+    @Test
+    public void canReadEventDefinitionsFromExtension() {
+        NetSnmpEventsExtension netSnmpEventConfExtension = new NetSnmpEventsExtension();
+        List<EventDefinition> eventDefinitions = netSnmpEventConfExtension.getEventDefinitions();
+        assertThat(eventDefinitions, hasSize(3));
+        EventDefinition nsNotifyStart = eventDefinitions.get(0);
+        assertThat(nsNotifyStart.getUei(), equalTo("uei.opennms.org/vendor/netsnmp/traps/nsNotifyStart"));
+        assertThat(nsNotifyStart.getPriority(), equalTo(20));
+        assertThat(nsNotifyStart.getSeverity(),equalTo(Severity.NORMAL));
+
+        EventDefinition nsNotifyShutdown = eventDefinitions.get(1);
+        assertThat(nsNotifyShutdown.getUei(), equalTo("uei.opennms.org/vendor/netsnmp/traps/nsNotifyShutdown"));
+        assertThat(nsNotifyShutdown.getPriority(), equalTo(20));
+        assertThat(nsNotifyShutdown.getSeverity(),equalTo(Severity.WARNING));
+
+        EventDefinition nsNotifyRestart = eventDefinitions.get(2);
+        assertThat(nsNotifyRestart.getUei(), equalTo("uei.opennms.org/vendor/netsnmp/traps/nsNotifyRestart"));
+        assertThat(nsNotifyRestart.getPriority(), equalTo(20));
+        assertThat(nsNotifyRestart.getSeverity(),equalTo(Severity.NORMAL));
     }
 }
