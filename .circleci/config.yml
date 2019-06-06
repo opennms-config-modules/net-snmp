@@ -3,16 +3,13 @@ version: 2.1
 executors:
   maven-executor:
     docker:
-      - image: opennms/maven:3.6.0-b3
+      - image: opennms/maven:jdk8_3.6.1
 
 workflows:
   # Run build-jobs for all branches and any tag
   build-jobs:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
+      - build
 
 jobs:
   build:
@@ -23,3 +20,9 @@ jobs:
           name: Build configuration module
           command: |
             mvn install
+      - store_artifacts:
+          path: ./karaf-features/target/classes/features.xml
+          destination: features.xml
+      - store_artifacts:
+          path: ./plugin/target/netsnmp-plugin-1.0.0-SNAPSHOT.jar
+          destination: net-snmp-plugin.jar
