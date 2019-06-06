@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>netsnmp-plugin</artifactId>
     <name>OpenNMS :: Plugins :: Config :: Net-SNMP :: Main</name>
-    <packaging>bundle</packaging>
+    <packaging>pom</packaging>
 
     <build>
         <plugins>
@@ -32,6 +32,7 @@
         <dependency>
             <groupId>org.opennms.integration.api</groupId>
             <artifactId>config</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Test -->
