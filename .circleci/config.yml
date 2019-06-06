@@ -21,8 +21,5 @@ jobs:
           command: |
             mvn install
       - store_artifacts:
-          path: ./karaf-features/target/classes/features.xml
-          destination: features.xml
-      - store_artifacts:
           path: ./plugin/target/netsnmp-plugin-1.0.0-SNAPSHOT.jar
           destination: net-snmp-plugin.jar
