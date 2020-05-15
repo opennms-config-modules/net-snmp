@@ -50,7 +50,7 @@ public class ConfigTest {
     @Test
     public void canLoadGraphPropertiesExtension() {
         NetSnmpGraphPropertiesExtension graphPropertiesExtension = new NetSnmpGraphPropertiesExtension();
-        assertThat(graphPropertiesExtension.getPrefabGraphs(), hasSize(24));
+        assertThat(graphPropertiesExtension.getPrefabGraphs(), hasSize(27));
     }
 
     @Test
