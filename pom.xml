@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.opennms.plugins.config</groupId>
   <artifactId>netsnmp-parent</artifactId>
@@ -15,6 +15,7 @@
     <junit.version>4.13</junit.version>
     <opennms.api.version>0.4.1</opennms.api.version>
     <karaf.version>4.2.6</karaf.version>
+    <jakarta.version>2.3.3</jakarta.version>
   </properties>
 
   <modules>
@@ -93,8 +94,12 @@
       <id>sonatype.org-snapshot</id>
       <name>Sonatype OSS Snapshots Repository</name>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases><enabled>false</enabled></releases>
-      <snapshots><enabled>true</enabled></snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
   </repositories>
 
