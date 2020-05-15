@@ -3,23 +3,69 @@ version: 2.1
 executors:
   maven-executor:
     docker:
-      - image: opennms/maven:jdk8_3.6.1
+      - image: circleci/openjdk:11.0.7-jdk-buster
+
+  release-executor:
+    docker:
+      - image: opennms/ghr:0.13.0-b4241
 
 workflows:
-  # Run build-jobs for all branches and any tag
-  build-jobs:
+  commit:
     jobs:
       - build
+      - release-github:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
 
 jobs:
   build:
     executor: maven-executor
     steps:
       - checkout
+
       - run:
-          name: Build configuration module
+          name: Fetch version number from pom.xml
           command: |
-            mvn install
+            .circleci/scripts/pom2version.py pom.xml > version.txt
+
+      - run:
+          name: Run the tests
+          command: |
+            mvn -DskipITs=false install test integration-test
+
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/junit/ \;
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+
+      - store_test_results:
+          path: ~/junit
+
       - store_artifacts:
-          path: ./plugin/target/netsnmp-plugin-1.0.0-SNAPSHOT.jar
-          destination: net-snmp-plugin.jar
+          path: ./plugin/target
+          destination: target
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  release-github:
+      executor: release-executor
+      steps:
+        - attach_workspace:
+            at: ~/
+
+        - run:
+            name: Collect artifacts and publish archives to GitHub
+            command: |
+              mkdir github-latest
+              cp plugin/target/netsnmp-plugin-*.jar github-latest/netsnmp-plugin-$(cat version.txt).jar
+              ghr -replace -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} v$(cat version.txt) github-latest
