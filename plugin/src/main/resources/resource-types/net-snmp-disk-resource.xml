@@ -1,0 +1,26 @@
+<resource-types xmlns="http://xmlns.opennms.org/xsd/config/datacollection">
+  <resourceType name="diskIOIndex" label="Disk IO (UCD-SNMP MIB)"
+                resourceLabel="${diskIODevice} (index ${index})">
+    <persistenceSelectorStrategy class="org.opennms.netmgt.collectd.PersistRegexSelectorStrategy">
+      <parameter key="match-expression" value="not(#diskIODevice matches '^(loop|ram|bcache|rbd).*')"/>
+    </persistenceSelectorStrategy>
+    <storageStrategy class="org.opennms.netmgt.dao.support.SiblingColumnStorageStrategy">
+      <parameter key="sibling-column-name" value="diskIODevice"/>
+      <parameter key="replace-all" value="s/^-//"/>
+      <parameter key="replace-all" value="s/\s//"/>
+      <parameter key="replace-all" value="s/:\\.*//"/>
+    </storageStrategy>
+  </resourceType>
+
+  <resourceType name="dskIndex" label="Disk Table Index (UCD-SNMP MIB)"
+                resourceLabel="${ns-dskPath} (index ${index})">
+    <persistenceSelectorStrategy class="org.opennms.netmgt.collection.support.PersistAllSelectorStrategy"/>
+    <storageStrategy class="org.opennms.netmgt.dao.support.SiblingColumnStorageStrategy">
+      <parameter key="sibling-column-name" value="ns-dskPath"/>
+      <parameter key="replace-first" value="s/^-$/_root_fs/"/>
+      <parameter key="replace-all" value="s/^-//"/>
+      <parameter key="replace-all" value="s/\s//"/>
+      <parameter key="replace-all" value="s/:\\.*//"/>
+    </storageStrategy>
+  </resourceType>
+</resource-types>

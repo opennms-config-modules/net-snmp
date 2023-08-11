@@ -1,4 +1,4 @@
-<datacollection-group xmlns="https://xmlns.opennms.org/xsd/config/datacollection" name="Net-SNMP-system">
+<datacollection-group xmlns="http://xmlns.opennms.org/xsd/config/datacollection" name="Net-SNMP-system">
     <group name="ucd-loadavg" ifType="ignore">
         <mibObj oid=".1.3.6.1.4.1.2021.10.1.5" instance="1" alias="loadavg1" type="integer"/>
         <mibObj oid=".1.3.6.1.4.1.2021.10.1.5" instance="2" alias="loadavg5" type="integer"/>

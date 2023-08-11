@@ -1,0 +1,88 @@
+---
+version: 2.1
+
+executors:
+  maven-executor:
+    docker:
+      - image: opennms/build-env:11.0.14_9-3.8.7-b9876
+
+  release-executor:
+    docker:
+      - image: opennms/ghr:0.13.0-b4241
+
+workflows:
+  commit:
+    jobs:
+      - build
+      - release-github:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+
+jobs:
+  build:
+    executor: maven-executor
+    steps:
+      - checkout
+
+      - run:
+          name: Fetch version number from pom.xml
+          command: |
+            .circleci/scripts/pom2version.py pom.xml > version.txt
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: |
+           mvn dependency:resolve-plugins
+           mvn dependency:go-offline || true
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run:
+          name: Run the tests
+          command: |
+            mvn -DskipITs=false install test integration-test
+
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/junit/ \;
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+
+      - store_test_results:
+          path: ~/junit
+
+      - store_artifacts:
+          path: ./plugin/target
+          destination: target
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  release-github:
+      executor: release-executor
+      steps:
+        - attach_workspace:
+            at: ~/
+
+        - run:
+            name: Collect artifacts and publish archives to GitHub
+            command: |
+              mkdir github-latest
+              cp plugin/target/netsnmp-plugin-*.jar github-latest/netsnmp-plugin-$(cat version.txt).jar
+              ghr -replace -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} v$(cat version.txt) github-latest

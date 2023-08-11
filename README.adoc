@@ -2,6 +2,8 @@
 
 OpenNMS configuration for *nix systems with Net-SNMP agent installed.
 
+[![OpenNMS](https://circleci.com/gh/opennms-config-modules/net-snmp.svg?style=shield)](https://app.circleci.com/pipelines/github/opennms-config-modules/net-snmp)
+
 == Requirements
 
 Running OpenNMS *NIX operating system

@@ -1,2 +1,7 @@
-net-snmp.iml
+.idea/
+.settings/
+*/target/*
+*.iml
+.project
+.classpath
 
