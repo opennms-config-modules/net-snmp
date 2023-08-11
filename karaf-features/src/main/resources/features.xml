@@ -3,7 +3,7 @@
 
     <feature name="opennms-plugins-netsnmp" description="OpenNMS :: Plugins :: Net-SNMP" version="${project.version}">
         <feature dependency="true">aries-blueprint</feature>
-        <feature dependency="false">shell</feature>
+        <feature dependency="true">shell</feature>
         <feature version="${opennms.api.version}" dependency="true">opennms-integration-api</feature>
         <feature version="${okhttp.version}" dependency="true">okhttp</feature>
         <feature version="${guava.version}" dependency="true">guava</feature>
@@ -11,7 +11,7 @@
         <bundle dependency="true">mvn:org.apache.commons/commons-jexl3/${jexl.version}</bundle>
         <bundle dependency="true">mvn:io.dropwizard.metrics/metrics-core/${metrics.version}</bundle>
         <bundle dependency="true">mvn:javax.ws.rs/javax.ws.rs-api/2.1.1</bundle>
-        <bundle>mvn:org.opennms.plugins.netsnmp/${project.version}</bundle>
+        <bundle>mvn:org.opennms.plugins.netsnmp/netsnmp-plugin/${project.version}</bundle>
     </feature>
 
     <feature name="okhttp" description="okhttp" version="${okhttp.version}">
