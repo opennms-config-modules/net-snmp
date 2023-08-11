@@ -5,16 +5,16 @@
         ">
   <!-- Resource types -->
   <service interface="org.opennms.integration.api.v1.config.datacollection.ResourceTypesExtension">
-    <bean class="org.opennms.plugins.config.netsnmp.NetSnmpResourceTypesExtension"/>
+    <bean class="org.opennms.plugins.netsnmp.NetSnmpResourceTypesExtension"/>
   </service>
 
   <!-- SNMP Datacollection -->
   <service interface="org.opennms.integration.api.v1.config.datacollection.SnmpCollectionExtension">
-    <bean class="org.opennms.plugins.config.netsnmp.NetSnmpSnmpCollectionExtensionImpl"/>
+    <bean class="org.opennms.plugins.netsnmp.NetSnmpSnmpCollectionExtensionImpl"/>
   </service>
 
   <!-- Graphs -->
   <service interface="org.opennms.integration.api.v1.config.datacollection.graphs.GraphPropertiesExtension">
-    <bean class="org.opennms.plugins.config.netsnmp.NetSnmpGraphPropertiesExtension"/>
+    <bean class="org.opennms.plugins.netsnmp.NetSnmpGraphPropertiesExtension"/>
   </service>
 </blueprint>

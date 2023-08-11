@@ -26,29 +26,22 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.config.netsnmp;
+package org.opennms.plugins.netsnmp;
+
+import org.opennms.integration.api.v1.config.datacollection.ResourceType;
+import org.opennms.integration.api.xml.ClassPathResourceTypesLoader;
 
 import java.util.List;
 
-import org.opennms.integration.api.v1.config.datacollection.SnmpCollectionExtension;
-import org.opennms.integration.api.v1.config.datacollection.SnmpDataCollection;
-import org.opennms.integration.api.xml.ClasspathSnmpDataCollectionLoader;
+public class NetSnmpResourceTypesExtension implements org.opennms.integration.api.v1.config.datacollection.ResourceTypesExtension {
 
-public class NetSnmpSnmpCollectionExtensionImpl implements SnmpCollectionExtension {
-
-    private final ClasspathSnmpDataCollectionLoader snmpDataCollectionLoader =
-            new ClasspathSnmpDataCollectionLoader(NetSnmpSnmpCollectionExtensionImpl.class,
-                    "netsnmp.disk.xml",
-                    "netsnmp.lmsensors.xml",
-                    "netsnmp.system.xml");
+    private final ClassPathResourceTypesLoader classPathResourceTypesLoader =
+            new ClassPathResourceTypesLoader(NetSnmpResourceTypesExtension.class,
+                    "net-snmp-disk-resource.xml",
+                    "net-snmp-lmsensors-resources.xml");
 
     @Override
-    public List<SnmpDataCollection> getSnmpDataCollectionGroups() {
-        return snmpDataCollectionLoader.getSnmpDataCollections();
-    }
-
-    @Override
-    public String getSnmpCollectionName() {
-        return "default";
+    public List<ResourceType> getResourceTypes() {
+        return classPathResourceTypesLoader.getResourceTypes();
     }
 }

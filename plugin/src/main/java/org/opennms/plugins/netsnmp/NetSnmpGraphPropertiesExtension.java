@@ -26,23 +26,22 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.config.netsnmp;
-
-import org.opennms.integration.api.v1.config.events.EventConfExtension;
-import org.opennms.integration.api.v1.config.events.EventDefinition;
-import org.opennms.integration.api.xml.ClasspathEventDefinitionLoader;
+package org.opennms.plugins.netsnmp;
 
 import java.util.List;
 
-public class NetSnmpEventsExtension implements EventConfExtension {
-    private final ClasspathEventDefinitionLoader classpathEventDefinitionLoader = new ClasspathEventDefinitionLoader(
-            EventConfExtension.class,
-            "netsnmp.events.xml"
-    );
+import org.opennms.integration.api.v1.config.datacollection.graphs.PrefabGraph;
+import org.opennms.integration.api.xml.ClassPathGraphPropertiesLoader;
+
+public class NetSnmpGraphPropertiesExtension implements org.opennms.integration.api.v1.config.datacollection.graphs.GraphPropertiesExtension {
+
+    private ClassPathGraphPropertiesLoader graphPropertiesLoader = new ClassPathGraphPropertiesLoader(NetSnmpGraphPropertiesExtension.class,
+            "netsnmp.disk.graph.properties",
+            "netsnmp.lmsensors.graph.properties",
+            "netsnmp.system.graph.properties");
+
     @Override
-    public List<EventDefinition> getEventDefinitions() {
-        return classpathEventDefinitionLoader.getEventDefinitions();
+    public List<PrefabGraph> getPrefabGraphs() {
+        return graphPropertiesLoader.getGraphProperties();
     }
 }
-
-

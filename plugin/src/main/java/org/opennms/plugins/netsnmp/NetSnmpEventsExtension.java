@@ -26,22 +26,23 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.config.netsnmp;
+package org.opennms.plugins.netsnmp;
 
-import org.opennms.integration.api.v1.config.datacollection.ResourceType;
-import org.opennms.integration.api.xml.ClassPathResourceTypesLoader;
+import org.opennms.integration.api.v1.config.events.EventConfExtension;
+import org.opennms.integration.api.v1.config.events.EventDefinition;
+import org.opennms.integration.api.xml.ClasspathEventDefinitionLoader;
 
 import java.util.List;
 
-public class NetSnmpResourceTypesExtension implements org.opennms.integration.api.v1.config.datacollection.ResourceTypesExtension {
-
-    private final ClassPathResourceTypesLoader classPathResourceTypesLoader =
-            new ClassPathResourceTypesLoader(NetSnmpResourceTypesExtension.class,
-                    "net-snmp-disk-resource.xml",
-                    "net-snmp-lmsensors-resources.xml");
-
+public class NetSnmpEventsExtension implements EventConfExtension {
+    private final ClasspathEventDefinitionLoader classpathEventDefinitionLoader = new ClasspathEventDefinitionLoader(
+            EventConfExtension.class,
+            "netsnmp.events.xml"
+    );
     @Override
-    public List<ResourceType> getResourceTypes() {
-        return classPathResourceTypesLoader.getResourceTypes();
+    public List<EventDefinition> getEventDefinitions() {
+        return classpathEventDefinitionLoader.getEventDefinitions();
     }
 }
+
+
