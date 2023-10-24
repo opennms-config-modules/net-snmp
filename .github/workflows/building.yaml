@@ -21,5 +21,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-      - name: Run maven verify phase
+      - name: Run maven validate
+        run: mvn validate
+      - name: Run maven verify
         run: mvn --batch-mode --update-snapshots verify
