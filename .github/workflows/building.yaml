@@ -4,10 +4,10 @@ name: Compile test and build a a plugin
 on:
   push:
     branches:
-      - main
+      - issue/use-gh-actions
   pull_request:
     branches:
-      - main
+      - issue/use-gh-actions
   workflow_dispatch:
 
 jobs:
