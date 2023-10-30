@@ -66,7 +66,7 @@ jobs:
           path: ~/junit
 
       - store_artifacts:
-          path: ./plugin/target
+          path: ./assembly/kar/target
           destination: target
 
       - persist_to_workspace:
